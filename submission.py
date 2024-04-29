@@ -19,8 +19,6 @@ run.py can be used to test your submission.
 import pandas as pd
 import joblib
 import numpy as np
-import matplotlib.pyplot as plt
-import joblib 
 from joblib import load
 from sklearn.model_selection import train_test_split
 from imblearn.over_sampling import SMOTE
