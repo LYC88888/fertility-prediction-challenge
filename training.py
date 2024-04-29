@@ -4,7 +4,13 @@ from imblearn.over_sampling import SMOTE
 import xgboost as xgb
 from joblib import dump
 from sklearn.metrics import f1_score
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score, confusion_matrix
+from sklearn.metrics import classification_report
+
+# loading data (predictors)
+train = pd.read_csv("PreFer_train_data.csv", low_memory = False) 
+# loading the outcome
+outcome = pd.read_csv("PreFer_train_outcome.csv") 
 
 def train_save_model(cleaned_df, outcome_df):
     
@@ -19,7 +25,7 @@ def train_save_model(cleaned_df, outcome_df):
     
     # Prepare the feature matrix X by dropping the target variable and other non-predictor columns
     X = model_df.drop(['new_child', 'nomem_encr'], axis=1) #axis = 1 equals to columns / axis = 0 equals to rows
-    # The target variable y is what was wanted to predict
+    # The target variable y is what we want to predict
     y = model_df['new_child']
 
     # Split the data into training (90%) and validation sets (10%)
@@ -34,23 +40,20 @@ def train_save_model(cleaned_df, outcome_df):
 
     # Train the model on the oversampled training data
     model.fit(X_train_SMOTE, y_train_SMOTE)
-
+    
     # Save the trained model to a file for later use
-    dump(model, "model.joblib")
+    joblib.dump(model, "model.joblib")
 
-    return model  
 
-# import os
 
-# # print(os.getcwd())
-# # os.chdir(path to your local repository) #<---- provide the path here
+import os
+# print(os.getcwd())
+# os.chdir(path to your local repository) #<---- provide the path here
 
-# # preprocessing the data
-# train_cleaned = clean_df(df, background_df)
+# preprocessing the data
+train_cleaned = clean_df(train, background_df)
 
-# # Load outcome dataset
-# outcome_df =  pd.read_csv('PreFer_fake_outcome.csv', sep=',', low_memory=False)
+# training and saving the model
+train_save_model(train_cleaned, outcome)
 
-# # training and saving the model
-# train_save_model(train_cleaned, outcome_df)
 
