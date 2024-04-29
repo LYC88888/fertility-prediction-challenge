@@ -75,7 +75,7 @@ def clean_df(df, background_df=None):
             'cf20m532', #How did you and your partner arrange the work of raising and caring for the children? - bringing to/fetching from daycare or school, attending sports activities, clubs, etc.
             'cf20m533', #How did you and your partner arrange the work of raising and caring for the children? - talking about problems in school
             'cf20m534' #How did you and your partner arrange the work of raising and caring for the children? - small outings, as to the cinema, zoo, etc.
-             ]].copy() #51 Do you consider it a loss not having had children, or does it not matter much, or are you content with it? 
+             ]].copy() 
 
     df = df[df['outcome_available'] == 1]
     
@@ -101,10 +101,10 @@ def clean_df(df, background_df=None):
     
     return df
 
-# df = pd.read_csv('PreFer_train_data.csv', sep=',', low_memory=False)
-# background_df = pd.read_csv('PreFer_train_background_data.csv', sep=',', low_memory=False)
-# merged_train_background_data_df = clean_df(df, background_df)
-# print(merged_train_background_data_df)
+df = pd.read_csv('PreFer_train_data.csv', sep=',', low_memory=False)
+background_df = pd.read_csv('PreFer_train_background_data.csv', sep=',', low_memory=False)
+merged_train_background_data_df = clean_df(df, background_df)
+print(merged_train_background_data_df)
 
 # print(merged_train_background_data_df.isnull().sum()) #checked for NaN values
 # # print(merged_train_background_data_df.shape)
