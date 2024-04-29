@@ -101,10 +101,10 @@ def clean_df(df, background_df=None):
     
     return df
 
-df = pd.read_csv('PreFer_train_data.csv', sep=',', low_memory=False)
-background_df = pd.read_csv('PreFer_train_background_data.csv', sep=',', low_memory=False)
-merged_train_background_data_df = clean_df(df, background_df)
-print(merged_train_background_data_df)
+# df = pd.read_csv('PreFer_train_data.csv', sep=',', low_memory=False)
+# background_df = pd.read_csv('PreFer_train_background_data.csv', sep=',', low_memory=False)
+# merged_train_background_data_df = clean_df(df, background_df)
+# print(merged_train_background_data_df)
 
 # print(merged_train_background_data_df.isnull().sum()) #checked for NaN values
 # # print(merged_train_background_data_df.shape)
