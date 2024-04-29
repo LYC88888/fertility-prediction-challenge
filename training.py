@@ -1,36 +1,56 @@
-"""
-This is an example script to train your model given the (cleaned) input dataset.
-
-This script will not be run on the holdout data, 
-but the resulting model model.joblib will be applied to the holdout data.
-
-It is important to document your training steps here, including seed, 
-number of folds, model, et cetera
-"""
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from imblearn.over_sampling import SMOTE
+import xgboost as xgb
+from joblib import dump
+from sklearn.metrics import f1_score
+from sklearn.metrics import accuracy_score
 
 def train_save_model(cleaned_df, outcome_df):
-    """
-    Trains a model using the cleaned dataframe and saves the model to a file.
-
-    Parameters:
-    cleaned_df (pd.DataFrame): The cleaned data from clean_df function to be used for training the model.
-    outcome_df (pd.DataFrame): The data with the outcome variable (e.g., from PreFer_train_outcome.csv or PreFer_fake_outcome.csv).
-    """
     
-    ## This script contains a bare minimum working example
-    random.seed(1) # not useful here because logistic regression deterministic
-    
-    # Combine cleaned_df and outcome_df
+    if isinstance(outcome_df, str):
+        outcome_df = pd.read_csv(outcome_df, sep=',', low_memory=False)
+        
+    # Merge the cleaned dataframe with outcome dataframe on 'nomem_encr'
     model_df = pd.merge(cleaned_df, outcome_df, on="nomem_encr")
-
-    # Filter cases for whom the outcome is not available
-    model_df = model_df[~model_df['new_child'].isna()]  
     
-    # Logistic regression model
-    model = LogisticRegression()
+    # Drop any rows where 'new_child' might be NaN to ensure clean training data
+    model_df = model_df.dropna(subset=['new_child'])
+    
+    # Prepare the feature matrix X by dropping the target variable and other non-predictor columns
+    X = model_df.drop(['new_child', 'nomem_encr'], axis=1) #axis = 1 equals to columns / axis = 0 equals to rows
+    # The target variable y is what was wanted to predict
+    y = model_df['new_child']
 
-    # Fit the model
-    model.fit(model_df[['age']], model_df['new_child'])
+    # Split the data into training (90%) and validation sets (10%)
+    X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.1, random_state=42)
 
-    # Save the model
-    joblib.dump(model, "model.joblib")
+    # Apply SMOTE to address class imbalance by oversampling the minority class in the training data
+    smote = SMOTE(random_state=42)
+    X_train_SMOTE, y_train_SMOTE = smote.fit_resample(X_train, y_train)
+
+    # Initialize the XGBoost classifier with specific hyperparameters
+    model = xgb.XGBClassifier(objective='binary:logistic', learning_rate=0.1, n_estimators=84, use_label_encoder=False, eval_metric='logloss')
+
+    # Train the model on the oversampled training data
+    model.fit(X_train_SMOTE, y_train_SMOTE)
+
+    # Save the trained model to a file for later use
+    dump(model, "model.joblib")
+
+    return model  
+
+# import os
+
+# # print(os.getcwd())
+# # os.chdir(path to your local repository) #<---- provide the path here
+
+# # preprocessing the data
+# train_cleaned = clean_df(df, background_df)
+
+# # Load outcome dataset
+# outcome_df =  pd.read_csv('PreFer_fake_outcome.csv', sep=',', low_memory=False)
+
+# # training and saving the model
+# train_save_model(train_cleaned, outcome_df)
+
