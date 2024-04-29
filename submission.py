@@ -86,14 +86,6 @@ def clean_df(df, background_df=None):
 # merged_train_background_data_df = clean_df(df, background_df)
 # print(merged_train_background_data_df)
 
-
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
-import joblib
-from joblib import load
-
 def predict_outcomes(df, background_df=None, model_path="model.joblib"):
     
     if "nomem_encr" not in df.columns:
