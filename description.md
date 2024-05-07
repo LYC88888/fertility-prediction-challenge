@@ -26,3 +26,22 @@ Chosen predictors:
 'cf09b406', 'cf10c406', 'cf11d406', 'cf12e406', 'cf13f406', 'cf14g406', # Are all these children still alive? 
 'cf09b407', 'cf10c407', 'cf11d407', 'cf12e407', 'cf13f407', 'cf14g407', 'cf15h407', 'cf16i407', 'cf17j407', 'cf18k407', 'cf19l407', 'cf20m407', # Do you consider yourself as childless by choice, or would you have liked to have children? 
 'cf09b408', 'cf10c408', 'cf11d408', 'cf12e408', 'cf13f408', 'cf14g408', 'cf15h408', 'cf16i408', 'cf17j408', 'cf18k408', 'cf19l408', 'cf20m408', #Do you consider it a loss not having had children, or does it not matter much, or are you content with it?
+'cf11d432', 'cf12e432', 'cf13f432', 'cf14g432', 'cf15h432', 'cf16i432', 'cf17j432', 'cf18k432', 'cf19l432', #How would you generally describe the relationship with your family?
+'cf15h454', 'cf16i454', 'cf17j454', 'cf18k454', 'cf19l454', 'cf20m454', #Did you ever have any children?
+'cf15h455', 'cf16i455', 'cf17j455', 'cf18k455', 'cf19l455', 'cf20m455', #How many living children do you have in total?
+'cf15h471', 'cf16i471', 'cf17j471', 'cf18k471', 'cf19l471', 'cf20m471', #Did you ever have (a) child(ren) who passed away after being born?
+'cf15h483', 'cf16i483', 'cf17j483', 'cf18k483', 'cf19l483', 'cf20m483', #How is the household work divided between you and your partner? - preparing food
+'cf15h484', 'cf16i484', 'cf17j484', 'cf18k484', 'cf19l484', 'cf20m484', #How is the household work divided between you and your partner? - laundry, ironing
+'cf15h485', 'cf16i485', 'cf17j485', 'cf18k485', 'cf19l485', 'cf20m485', #How is the household work divided between you and your partner? - house cleaning
+'cf15h486', 'cf16i486', 'cf17j486', 'cf18k486', 'cf19l486', 'cf20m486', #How is the household work divided between you and your partner? - odd jobs in and around the house
+'cf15h487', 'cf16i487', 'cf17j487', 'cf18k487', 'cf19l487', 'cf20m487', #How is the household work divided between you and your partner? - financial administration
+'cf15h488', 'cf16i488', 'cf17j488', 'cf18k488', 'cf19l488', 'cf20m488', #How is the household work divided between you and your partner? - grocery shopping
+'cf20m526', #How would you generally describe the relationship with your family?
+'cf20m527', #How have you and your partner arranged the work of raising and caring for the children? - storyreading, playing games, other forms of play
+'cf20m528', #How have you and your partner arranged the work of raising and caring for the children? - bringing to/fetching from daycare or school, attending sports activities, clubs, etc.
+'cf20m529', #How have you and your partner arranged the work of raising and caring for the children? - talking about problems in school
+'cf20m530', #How have you and your partner arranged the work of raising and caring for the children? - small outings, as to the cinema, zoo, etc.
+'cf20m531', #How did you and your partner arrange the work of raising and caring for the children? - storyreading, playing games, other forms of play
+'cf20m532', #How did you and your partner arrange the work of raising and caring for the children? - bringing to/fetching from daycare or school, attending sports activities, clubs, etc.
+'cf20m533', #How did you and your partner arrange the work of raising and caring for the children? - talking about problems in school
+'cf20m534', #How did you and your partner arrange the work of raising and caring for the children? - small outings, as to the cinema, zoo, etc.
