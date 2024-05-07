@@ -76,9 +76,7 @@ def clean_df(df, background_df=None):
              'cf20m531', # How did you and your partner arrange the work of raising and caring for the children? - storyreading, playing games, other forms of play
              'cf20m532', # How did you and your partner arrange the work of raising and caring for the children? - bringing to/fetching from daycare or school, attending sports activities, clubs, etc.
              'cf20m533', # How did you and your partner arrange the work of raising and caring for the children? - talking about problems in school
-             'cf20m534', # How did you and your partner arrange the work of raising and caring for the children? - small outings, as to the cinema, zoo, etc.
-             'ca08a001', 'ca10b001', 'ca12c001', 'ca14d001', 'ca16e001', 'ca18f001', 'ca20g001']].copy()  # The head of household lives together with a partner (married or unmarried) --> Economic Situation Assets
-            
+             'cf20m534']].copy()  # How did you and your partner arrange the work of raising and caring for the children? - small outings, as to the cinema, zoo, etc.
 
     df = df[df['outcome_available'] == 1]
     
