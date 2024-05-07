@@ -34,7 +34,7 @@ def train_save_model(cleaned_df, outcome_df):
     # With specific hyperparameters
     model = xgb.XGBClassifier(objective='binary:logistic', learning_rate=0.1, n_estimators=50, use_label_encoder=False, eval_metric='logloss')
 
-    # Train the model on the oversampled training data
+    # Train the model on the training data
     model.fit(X_train, y_train)
     
     # Predict probabilities
@@ -61,6 +61,7 @@ def train_save_model(cleaned_df, outcome_df):
     joblib.dump(model, "model.joblib")
 
 # REAL DATA:
+
 import os
 # print(os.getcwd())
 # os.chdir(path to your local repository) #<---- provide the path here
