@@ -4,7 +4,7 @@ from imblearn.over_sampling import SMOTE
 import xgboost as xgb
 from joblib import dump
 from sklearn.metrics import f1_score
-from sklearn.metrics import accuracy_score, precision_recall_curve, f1_score
+from sklearn.metrics import accuracy_score, classification_report
 
 
 # loading data (predictors)
@@ -31,43 +31,31 @@ def train_save_model(cleaned_df, outcome_df):
     # Split the data into training (90%) and validation sets (10%)
     X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.1, random_state=42, stratify=y)
     
+    # Apply SMOTE to address class imbalance by oversampling the minority class in the training data
+    smote = SMOTE(random_state=42)
+    X_train_SMOTE, y_train_SMOTE = smote.fit_resample(X_train, y_train)
+
     # With specific hyperparameters
     model = xgb.XGBClassifier(objective='binary:logistic', learning_rate=0.1, n_estimators=50, use_label_encoder=False, eval_metric='logloss')
 
-    # Train the model on the training data
-    model.fit(X_train, y_train)
-    
-    # Predict probabilities
-    y_probs_XGB_threshold = model.predict_proba(X_val)[:, 1]
-
-    # Calculate precision, recall, and thresholds
-    precision, recall, thresholds = precision_recall_curve(y_val, y_probs_XGB_threshold)
-
-    # Calculate F1 scores for each threshold
-    f1_scores = 2 * (precision * recall) / (precision + recall)
-
-    # Locate the index of the largest F1 score
-    ix = np.argmax(f1_scores)
-    # print('Best Threshold=%f, F1-Score=%.3f' % (thresholds[ix], f1_scores[ix]))
-    
-    # Using threshold to convert probabilities to binary class predictions
-    y_pred_XGB_threshold = (y_probs_XGB_threshold >= thresholds[ix]).astype(int)
-    
-    # print('Accuracy:', accuracy_score(y_val, y_pred_XGB_threshold))
-    # print('XGBoost without SMOTE + Threshold:')
-    # print(classification_report(y_val, y_pred_XGB_threshold))
+    # Train the model on the oversampled training data
+    model.fit(X_train_SMOTE, y_train_SMOTE)
     
     # Save the trained model to a file for later use
     joblib.dump(model, "model.joblib")
+    
+    # return model # delete return after saving it in model.joblib
 
 # REAL DATA:
 
-import os
-# print(os.getcwd())
-# os.chdir(path to your local repository) #<---- provide the path here
+# import os
+# # print(os.getcwd())
+# # os.chdir(path to your local repository) #<---- provide the path here
 
-# preprocessing the function
-train_cleaned = clean_df(df, background_df)
+# # preprocessing the function
+# train_cleaned = clean_df(df, background_df)
 
-# training and saving the model
-train_save_model(train_cleaned, outcome)
+# outcome_df = pd.read_csv('PreFer_train_outcome.csv', sep=',', low_memory=False)
+
+# # training and saving the model
+# train_save_model(train_cleaned, outcome_df)
