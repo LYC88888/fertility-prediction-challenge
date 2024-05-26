@@ -1,11 +1,10 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from imblearn.over_sampling import SMOTE
-import xgboost as xgb
 from joblib import dump
 from sklearn.metrics import f1_score
 from sklearn.metrics import accuracy_score, classification_report
-
+from sklearn.ensemble import RandomForestClassifier
 
 # loading data (predictors)
 train = pd.read_csv("PreFer_train_data.csv", low_memory = False) 
@@ -36,8 +35,8 @@ def train_save_model(cleaned_df, outcome_df):
     X_train_SMOTE, y_train_SMOTE = smote.fit_resample(X_train, y_train)
 
     # With specific hyperparameters
-    model = xgb.XGBClassifier(objective='binary:logistic', learning_rate=0.1, n_estimators=50, use_label_encoder=False, eval_metric='logloss')
-
+    model = RandomForestClassifier(random_state=42, n_estimators=90)
+    
     # Train the model on the oversampled training data
     model.fit(X_train_SMOTE, y_train_SMOTE)
     
