@@ -113,3 +113,48 @@ def clean_df(df, background_df=None):
 # # print(merged_train_background_data_df.head())
 
 # print(merged_train_background_data_df.dtypes)
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+import joblib
+from joblib import load
+
+def predict_outcomes(df, background_df=None, model_path="model.joblib"):
+    
+    if "nomem_encr" not in df.columns:
+        print("The identifier variable 'nomem_encr' should be in the dataset")
+    
+    model = joblib.load(model_path)
+    # print(model)
+    
+    # Preprocess the fake / holdout data
+    df = clean_df(df, background_df)
+    # print(df)
+    
+    # Exclude the variable nomem_encr if this variable is NOT in your model
+    vars_without_id = df.columns[df.columns != 'nomem_encr']
+    # print(vars_without_id) --> Make this print function work, return something else --> return 1 (and not return df_predict)
+
+    # Generate predictions from model, should be 0 (no child) or 1 (had child)
+    predictions = model.predict(df[vars_without_id])
+    # print(predictions)
+
+    # Output file should be DataFrame with two columns, nomem_encr and predictions
+    df_predict = pd.DataFrame(
+            {"nomem_encr": df["nomem_encr"], "prediction": predictions})
+
+    # Return only dataset with predictions and identifier
+    return df_predict
+
+
+# # load the data
+# fake = pd.read_csv("PreFer_fake_data.csv") 
+# fake_background = pd.read_csv('PreFer_fake_background_data.csv', sep=',', low_memory=False)
+# predict_outcomes(fake, fake_background)
+
+
+
+
+
