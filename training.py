@@ -34,8 +34,8 @@ def train_save_model(cleaned_df, outcome_df):
     smote = SMOTE(random_state=42)
     X_train_SMOTE, y_train_SMOTE = smote.fit_resample(X_train, y_train)
 
-    # With specific hyperparameters
-    model = RandomForestClassifier(random_state=42, n_estimators=90)
+    # With specific hyperparameters or no hyperparameters
+    model = RandomForestClassifier(random_state=42)
     
     # Train the model on the oversampled training data
     model.fit(X_train_SMOTE, y_train_SMOTE)
