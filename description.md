@@ -1,7 +1,5 @@
 # Description of submission
 
---------------------------------------------
-
 Third submission - Random Forest + SMOTE  (180 + new_child = 181 variables)
 
 'nomem_encr', #Unique number
@@ -100,15 +98,13 @@ Third submission - Random Forest + SMOTE  (180 + new_child = 181 variables)
 
 --------------------------------------------
 
-(List of variables for the first and second submission, can be found at the end of this Description.md file)
+(List of variables for the first and second submissions, can be found at the end of this Description.md file)
 
 --------------------------------------------
 
 Predicting Fertility Data Challenge - June 3rd 2024
 
 1	Introduction
-
-1.1	Introduction and Problem Statement
 
 Fertility has been studied in the recent years, but there is still room for improvement especially about predicting about fertility intentions in the Netherlands (Sivak et al., 2024a, 2024c). The prevalence of childlessness has experienced a substantial rise in the past few decades. In the Netherlands, the percentage of women born between 1935 and 1945 who did not have children was approximately 11%. However, among women born between 1955 and 1975, this percentage increased to approximately 18% (Brakel et al., 2020). Among males, there is a comparable rise from approximately 17% to 26% (Stulp, 2024). Conducting study on fertility intention in the Netherlands is not uncommon, as several other countries (e.g. China (M. Li & Xu, 2022; Zhu et al., 2022), Israel (Preis et al., 2020), Italy (Mussino et al., 2023), Niger (Ahinkorah et al., 2021), Norway (Lappegård et al., 2022), Romania (Ciritel et al., 2019), South-Korea (Kim, 2023), United States (Beaujouan & Berghammer, 2019)) also conduct similar studies about the topic fertility intentions.
 
@@ -117,16 +113,6 @@ Not only has childlessness undergone a severe transformation, but the average nu
 The study of fertility is extensively researched across various academic fields due to its significance to both individuals and societies. Several factors have been identified that are associated with fertility findings. However, these significant determinants only account for a small portion of the variations in fertility results, and researchers are unable to even comprehend their short-term changes.
 
 Therefore, PreFer (Predicting Fertility data challenge) wants to know if people in the Netherlands will have children in 2021, 2022 and/or 2023. The objective of the challenge is to assess the level of predictability in fertility intentions in the Netherlands in the (near) future using machine learning (ML) techniques and to address which features are relevant to make this prediction (Sivak et al., 2024a, 2024c).
-
-1.2	Motivation and Relevance
-
-1.2.1	Societal Relevance
-
-The objective of this research about predicting individual fertility intentions in the Netherlands is important because it gives more information and understanding about fertility intentions and possible increase/decrease in birth rate in the (near) future. It could give valuable insights for governments and policymakers to make adaptions on time if necessary.
-
-1.2.2	Scientific Relevance
-
-Research about predicting fertility intention in the Netherlands has not been done before using machine learning algorithms, therefore this research provides new knowledge and brings novelty.
 
 2	Literature Review / Related Work
 
