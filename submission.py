@@ -46,8 +46,7 @@ def clean_df(df, background_df=None):
             'cf19l485', 'cf20m485', 'cf17j486', 'cf18k486', 'cf19l486', 'cf20m486',
             'cf18k487', 'cf19l487', 'cf20m487', 'cf18k488', 'cf20m488', 'cf20m526',
             'cf20m527', 'cf20m528', 'cf20m529', 'cf20m530', 'ci17j006', 'ci18k006',
-            'ci19l006', 'ci20m006', 'gender_imp', 'birthyear_imp', 'oplzon',
-            'oplmet', 'woonvorm', 'woning', 'brutoink_f']].copy()
+            'ci19l006', 'ci20m006']].copy()
              
     df = df[df['outcome_available'] == 1]
     
