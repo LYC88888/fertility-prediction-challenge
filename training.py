@@ -1,10 +1,10 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from imblearn.over_sampling import SMOTE
+import xgboost as xgb
 from joblib import dump
 from sklearn.metrics import f1_score
 from sklearn.metrics import accuracy_score, classification_report
-from sklearn.ensemble import RandomForestClassifier
 
 # loading data (predictors)
 train = pd.read_csv("PreFer_train_data.csv", low_memory = False) 
@@ -28,14 +28,14 @@ def train_save_model(cleaned_df, outcome_df):
     y = model_df['new_child']
 
     # Split the data into training (90%) and validation sets (10%)
-    X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.1, random_state=42, stratify=y)
+    X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
     
     # Apply SMOTE to address class imbalance by oversampling the minority class in the training data
     smote = SMOTE(random_state=42)
     X_train_SMOTE, y_train_SMOTE = smote.fit_resample(X_train, y_train)
 
     # With specific hyperparameters or no hyperparameters
-    model = RandomForestClassifier(random_state=42)
+    model = xgb.XGBClassifier(objective='binary:logistic', learning_rate=0.2, n_estimators=50, min_child_weight=1, max_depth=2, use_label_encoder=False, eval_metric='logloss')
     
     # Train the model on the oversampled training data
     model.fit(X_train_SMOTE, y_train_SMOTE)
