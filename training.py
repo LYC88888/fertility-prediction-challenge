@@ -6,6 +6,7 @@ from joblib import dump
 from sklearn.metrics import f1_score
 from sklearn.metrics import accuracy_score, classification_report
 
+
 # loading data (predictors)
 train = pd.read_csv("PreFer_train_data.csv", low_memory = False) 
 # loading the outcome
@@ -34,9 +35,9 @@ def train_save_model(cleaned_df, outcome_df):
     smote = SMOTE(random_state=42)
     X_train_SMOTE, y_train_SMOTE = smote.fit_resample(X_train, y_train)
 
-    # With specific hyperparameters or no hyperparameters
+    # With specific hyperparameters
     model = xgb.XGBClassifier(objective='binary:logistic', learning_rate=0.2, n_estimators=50, min_child_weight=1, max_depth=2, use_label_encoder=False, eval_metric='logloss')
-    
+
     # Train the model on the oversampled training data
     model.fit(X_train_SMOTE, y_train_SMOTE)
     
