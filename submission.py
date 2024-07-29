@@ -63,12 +63,12 @@ def clean_df(df, background_df=None):
             background_df = background_df[['nomem_encr', 'gender_imp', 'birthyear_imp', 'oplzon', 'oplmet', 'woonvorm', 'woning', 'brutoink_f']].copy()
             background_df = background_df[(background_df['birthyear_imp'] >= 1975) & (background_df['birthyear_imp'] <= 2002)]
             background_df = background_df.groupby('nomem_encr').agg({
-                'gender_imp'    : 'first',
-                'birthyear_imp' : 'first',
-                'oplzon'        : 'first',
-                'oplmet'        : 'first', 
-                'woonvorm'      : 'first', 
-                'woning'        : 'first',
+                'gender_imp'    : 'last',
+                'birthyear_imp' : 'last',
+                'oplzon'        : 'last',
+                'oplmet'        : 'last', 
+                'woonvorm'      : 'last', 
+                'woning'        : 'last',
                 'brutoink_f'    : 'mean'}).reset_index()
         
             background_df = background_df.drop_duplicates()
