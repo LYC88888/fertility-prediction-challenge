@@ -29,25 +29,23 @@ from sklearn.metrics import accuracy_score
 from joblib import load
 import seaborn as sns
 
-
 def clean_df(df, background_df=None):
     if isinstance(df, str):
         df = pd.read_csv(df, sep=',', low_memory=False)
         
-    df = df[['nomem_encr', 
-            'outcome_available', 
-            'cf17j024', 'cf18k024', 'cf20m024', 'cf20m025', 'cf08a026', 'cf14g026',
-            'cf17j026', 'cf20m026', 'cf20m030', 'cf20m032', 'cf17j128', 'cf18k128',
-            'cf19l128', 'cf20m128', 'cf17j129', 'cf18k129', 'cf19l129', 'cf20m129',
-            'cf14g130', 'cf16i130', 'cf17j130', 'cf18k130', 'cf19l130', 'cf20m130',
-            'cf17j180', 'cf18k180', 'cf19l180', 'cf20m180', 'cf20m181', 'cf18k432',
-            'cf19l432', 'cf18k454', 'cf20m454', 'cf20m455', 'cf20m471', 'cf17j483',
-            'cf18k483', 'cf20m483', 'cf17j484', 'cf18k484', 'cf20m484', 'cf17j485',
-            'cf19l485', 'cf20m485', 'cf17j486', 'cf18k486', 'cf19l486', 'cf20m486',
-            'cf18k487', 'cf19l487', 'cf20m487', 'cf18k488', 'cf20m488', 'cf20m526',
-            'cf20m527', 'cf20m528', 'cf20m529', 'cf20m530', 'ci17j006', 'ci18k006',
-            'ci19l006', 'ci20m006']].copy()
+    df = df[['nomem_encr',
+            'outcome_available',
+            'cf18k024', 'cf20m024', 'cf20m025', 'cf14g026', 'cf20m026', 'cf20m030',
+            'cf20m032', 'cf17j128', 'cf18k128', 'cf19l128', 'cf20m128', 'cf14g129',
+            'cf17j129', 'cf18k129', 'cf19l129', 'cf20m129', 'cf16i130', 'cf17j130',
+            'cf18k130', 'cf19l130', 'cf20m130', 'cf17j180', 'cf20m180', 'cf20m181',
+            'cf19l432', 'cf20m454', 'cf17j455', 'cf20m455', 'cf17j483', 'cf18k484',
+            'cf19l484', 'cf20m484', 'cf19l485', 'cf20m485', 'cf18k486', 'cf20m486',
+            'cf17j487', 'cf19l487', 'cf20m487', 'cf17j488', 'cf18k488', 'cf19l488',
+            'cf20m488', 'cf20m526', 'cf20m527', 'cf20m528', 'cf20m530', 'ci17j006',
+            'ci18k006', 'ci19l006', 'ci20m006']].copy()
              
+
     df = df[df['outcome_available'] == 1]
     
     df.fillna(0, inplace=True)
@@ -57,7 +55,10 @@ def clean_df(df, background_df=None):
             background_df = pd.read_csv(background_df, sep=',', low_memory=False)
         
         if 'birthyear_imp' in background_df.columns:
-            background_df = background_df[['nomem_encr', 'gender_imp', 'birthyear_imp', 'oplzon', 'oplmet', 'woonvorm', 'woning', 'brutoink_f']].copy()
+            background_df = background_df[['nomem_encr', 'gender_imp', 'birthyear_imp', 'oplzon', 'oplmet', 
+                                        'woonvorm', 'woning', 'brutoink_f', 'positie', 'lftdcat', 'lftdhhh', 
+                                        'aantalhh', 'aantalki', 'partner', 'burgstat', 'belbezig', 'oplcat',
+                                        'doetmee', 'sted', 'werving', 'migration_background_imp']].copy()
             background_df = background_df[(background_df['birthyear_imp'] >= 1975) & (background_df['birthyear_imp'] <= 2002)]
             background_df = background_df.groupby('nomem_encr').agg({
                 'gender_imp'    : 'last',
@@ -66,6 +67,19 @@ def clean_df(df, background_df=None):
                 'oplmet'        : 'last', 
                 'woonvorm'      : 'last', 
                 'woning'        : 'last',
+                'positie'       : 'last',
+                'lftdcat'       : 'last', 
+                'lftdhhh'       : 'last',
+                'aantalhh'      : 'last',
+                'aantalki'      : 'last',
+                'partner'       : 'last',
+                'burgstat'      : 'last',
+                'belbezig'      : 'last',
+                'oplcat'        : 'last',
+                'doetmee'       : 'last',
+                'sted'          : 'last',
+                'werving'       : 'last',
+                'migration_background_imp' : 'last',
                 'brutoink_f'    : 'mean'}).reset_index()
         
             background_df = background_df.drop_duplicates()
