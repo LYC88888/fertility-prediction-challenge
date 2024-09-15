@@ -36,7 +36,9 @@ def train_save_model(cleaned_df, outcome_df):
     X_train_SMOTE, y_train_SMOTE = smote.fit_resample(X_train, y_train)
 
     # With specific hyperparameters
-    model = xgb.XGBClassifier(objective='binary:logistic', learning_rate=0.2, n_estimators=50, min_child_weight=1, max_depth=2, use_label_encoder=False, eval_metric='logloss')
+    model = xgb.XGBClassifier(objective='binary:logistic', learning_rate=0.2, 
+                              n_estimators=100, min_child_weight=1, max_depth=3, 
+                              use_label_encoder=False, eval_metric='logloss')
 
     # Train the model on the oversampled training data
     model.fit(X_train_SMOTE, y_train_SMOTE)
